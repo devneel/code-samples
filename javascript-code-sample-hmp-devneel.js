@@ -21,8 +21,8 @@
 // Now that the user has taken the screener, the submission is passed to this function to  see if the user qualifies to actually review the dating profile
 
 exports.postScreener = function(req, res, next) {
-    // the submission_id is the id of this screener's submission for this particular user
-    var submission_id = req.session.submission_id.toString()
+    // the submissionID is the id of this screener's submission for this particular user
+    var submissionID = req.session.submissionID.toString()
 
     // if this is the first time the user is on the screener, create the alreadyTriedArray in the session
     if (!req.session.alreadyTriedArray) {
@@ -34,11 +34,11 @@ exports.postScreener = function(req, res, next) {
         req.session.alreadyPassedArray = [];
     }
 
-    // store the details of the user's answers to the screener in qualTestResult
-    var qualTestResult = new QualTestResult({
-            session_id: req.sessionID,
+    // store the details of the user's answers to the screener in thisQualTestResult
+    var thisQualTestResult = new QualTestResult({
+            sessionID: req.sessionID,
             date: Date.now(),
-            submission_id: submission_id,
+            submissionID: submissionID,
             gender: req.body.gender,
             preference: req.body.preference,
             age: req.body.age,
@@ -47,30 +47,30 @@ exports.postScreener = function(req, res, next) {
         
     // we must use async because the following functions must execute before we redirect
     async.series([
-        // first save the qualTestResult if the screener for this has not already been filled
+        // first save the thisQualTestResult if the screener for this has not already been filled
         function(callback) {
-            if (req.session.alreadyTriedArray.indexOf(submission_id) < 0) { // user hasn't tried yet
-                qualTestResult.save(function(err) {
+            if (req.session.alreadyTriedArray.indexOf(submissionID) < 0) { // user hasn't tried yet
+                thisQualTestResult.save(function(err) {
                     if (err) return err;
                     callback(null, 'Saved Qual Test Result')
                 })
             } else {
-                callback(null, 'Did not save qualTestResult because user has already tried on this submission')
+                callback(null, 'Did not save thisQualTestResult because user has already tried on this submission')
             }
         },
         function(callback) {
-            if (req.session.alreadyTriedArray.indexOf(submission_id) < 0) { //if user hasn't already tried
-                req.session.alreadyTriedArray.push(submission_id) // save that submission into the session to keep track of the user's try
+            if (req.session.alreadyTriedArray.indexOf(submissionID) < 0) { //if user hasn't already tried
+                req.session.alreadyTriedArray.push(submissionID) // save that submission into the session to keep track of the user's try
                 if (req.body.gender == 'Female' && req.body.preference == 'Men') { //if user passes screener
 
-                    req.session.alreadyPassedArray.push(submission_id) // user has passed - add them to the alreadyPassedArray so they don't have to take the screener again
+                    req.session.alreadyPassedArray.push(submissionID) // user has passed - add them to the alreadyPassedArray so they don't have to take the screener again
                     redirectTo = '/review-start'
                     callback(null, 'User qualifies - redirecting to review-start')
                 } else {
                     redirectTo = '/qual'
                     callback(null, 'User didn not qualify because gender is ' + req.body.gender + ' and pref is ' + req.body.preference + ' - redirecting to qual')
                 }
-            } else if (req.session.alreadyPassedArray.indexOf(submission_id) > -1) {
+            } else if (req.session.alreadyPassedArray.indexOf(submissionID) > -1) {
                 redirectTo = '/review-start'
                 callback(null, 'User has previously qualified - redirecting to review-start')
             } else {
@@ -109,10 +109,10 @@ exports.sendMailReportReady = function(req, name, email, dlo_source, callback) {
 
   // Save the email to be sent in the database for reference
   var sentMail = new Mail({
-    session_id : req.session_id,
+    sessionID : req.sessionID,
     name : name,
     email : email,
-    email_template : email_template,
+    emailTemplate : emailTemplate,
     sendDate : Date.now()
 
   })
