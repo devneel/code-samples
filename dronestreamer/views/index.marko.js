@@ -22,7 +22,7 @@ function create(__helpers) {
               "layout": __layoutHelper
             },
             function(out) {
-              out.w('First');
+              out.w('Dronestreamer');
             });
           __tag(out,
             ___node_modules_marko_layout_put_tag_js,
@@ -31,7 +31,7 @@ function create(__helpers) {
               "layout": __layoutHelper
             },
             function(out) {
-              out.w('<div class="container"><h1>Where do you go? My Lovely.</h1></div>');
+              out.w('<div class="container"><h1>Dronestreamer</h1><p class="lead">Data visualizations of drone devastation</p><p>Data provided by <a href="http://dronestre.am">dronestre.am</a></p></div>');
             });
         },
         "*": {

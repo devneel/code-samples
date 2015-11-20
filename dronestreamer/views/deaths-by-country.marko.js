@@ -41,7 +41,7 @@ function create(__helpers) {
               "layout": __layoutHelper
             },
             function(out) {
-              out.w('<div class="container"><h1 class="page-header">Donut</h1></div><div class="container"><div id="chart2" class="col-md-8 col-md-offset-2"><svg width="100%" height="100%" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid"></svg></div></div>');
+              out.w('<div class="container"><h1 class="page-header">Deaths By Country</h1></div><div class="container"><div id="chart2" class="col-md-8 col-md-offset-2"><svg width="100%" height="100%" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid"></svg></div></div>');
               __tag(out,
                 ___node_modules_marko_async_async_fragments_tag_js,
                 {});

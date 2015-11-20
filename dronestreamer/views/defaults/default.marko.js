@@ -23,7 +23,7 @@ function create(__helpers) {
         "content": data.layoutContent
       });
 
-    out.w(' - Dronestreamer</title></head><body><div id="body"><div class="navbar navbar-default navbar-fixed-top"><div class="container"><div class="navbar-header"><a href="../" class="navbar-brand">Dronestreamer</a><button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button></div><div class="navbar-collapse collapse" id="navbar-main"><ul class="nav navbar-nav navbar-right"><li><a href="/deaths-by-country">Deaths By Country</a></li><li><a href="https://wrapbootstrap.com/?ref=bsw" target="_blank">WrapBootstrap</a></li><li><a href="/table">Table</a></li></ul></div></div></div>');
+    out.w(' - Dronestreamer</title></head><body><div id="body"><div class="navbar navbar-default navbar-fixed-top"><div class="container"><div class="navbar-header"><a href="../" class="navbar-brand">Dronestreamer</a><button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button></div><div class="navbar-collapse collapse" id="navbar-main"><ul class="nav navbar-nav navbar-right"><li><a href="/deaths-by-country">Deaths By Country</a></li><li><a href="/table">Table</a></li></ul></div></div></div>');
     __tag(out,
       ______node_modules_marko_layout_placeholder_tag_js,
       {
