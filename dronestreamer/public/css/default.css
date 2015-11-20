@@ -1,0 +1,35 @@
+ /*default.css*/
+ /*Contains customizations added by Devneel Vaidya*/
+
+ html, body {
+ 	height: 100%;
+ }
+
+ #body {
+	margin-top: 70px;
+	min-height: 84%;
+ }
+
+ footer {
+	height: 50px;
+	border-top: 1px solid #F1F1F1;
+	text-align: center;
+	position:relative;
+	bottom:0;
+	width:100%;
+ }
+
+ .nvd3 text {
+ 	font-size: 30px;
+ 	margin: 20px;
+ }
+
+ .nv-pie, .nv-pieWrap {
+ 	text-align: center;
+ 	margin-left:30px;
+ }
+
+ 
+ .nv-legendrap {
+ 	width:400px;
+ }

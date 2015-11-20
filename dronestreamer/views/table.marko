@@ -1,0 +1,47 @@
+<layout-use template="./defaults/default.marko">
+    <layout-put into="title">Table</layout-put>
+
+    <layout-put into="body">
+		<div class="container">
+			<h1 class="page-header">Raw Data</h1>
+		</div>
+		<div class="container">
+			<async-fragment data-provider='data.strikes' var='strikes' client-reorder='true'>
+				<async-fragment-placeholder>
+					<div class="text-center">
+						<img src="images/ripple.gif" />
+						<p class="lead">Loading...</p>
+					</div>
+				</async-fragment-placeholder>
+			<table class="table">
+				<tr>
+					<th>Number</th>
+					<th>Country</th>
+					<th>Date</th>
+					<th>Narrative</th>
+					<th>Town</th>
+					<th>Deaths</th>
+					<th>Target</th>
+					<th>Lat</th>
+					<th>Long</th>
+				</tr>
+					<for each="strike in strikes">
+						<tr>
+							<td>${strike.number}</td>
+							<td>${strike.country}</td>
+							<td>${strike.date}</td>
+							<td>${strike.narrative}</td>
+							<td>${strike.town}</td>
+							<td>${strike.deaths}</td>
+							<td>${strike.target}</td>
+							<td>${strike.lat}</td>
+							<td>${strike.lon}</td>
+						</tr>
+					</for>	
+				</async-fragment>
+			</table>
+		
+		</div>
+		<async-fragments/>
+	</layout-put>
+</layout-use>
