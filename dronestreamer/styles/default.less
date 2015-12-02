@@ -1,0 +1,40 @@
+ /*default.less*/
+ /*Contains customizations added by Devneel Vaidya*/
+
+@import "bootstrap/less/bootstrap";
+@import "bootswatch";
+@import "variables";
+
+
+ html, body {
+	height: 100%;
+ }
+
+ #body {
+	margin-top: 70px;
+	min-height: 84%;
+ }
+
+ footer {
+	height: 50px;
+	border-top: 1px solid #F1F1F1;
+	text-align: center;
+	position:relative;
+	bottom:0;
+	width:100%;
+ }
+
+ .gap {
+	display:block;
+	height: 2*@line-height-computed;
+	&.gap-lg {
+		height: 6*@line-height-computed;
+	}
+	&.gap-sm {
+		height: 1*@line-height-computed;
+	}
+}
+
+.chart {
+	margin: 3em auto;
+}
