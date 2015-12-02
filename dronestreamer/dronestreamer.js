@@ -2,7 +2,6 @@
 
 var koa = 	require('koa'),
 router = 	require('koa-router')(),
-views = 	require('co-views'),
 marko = 	require('marko'),
 serve = 	require('koa-static'),
 compress = 	require('koa-compress'),
