@@ -4,6 +4,7 @@
   "description": "Data visualizations of Dronestre.am",
   "main": "dronestreamer.js",
   "dependencies": {
+    "co-views": "^2.1.0",
     "koa": "^1.1.2",
     "koa-compress": "^1.0.8",
     "koa-less": "0.0.3",
