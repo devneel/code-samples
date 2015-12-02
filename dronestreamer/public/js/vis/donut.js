@@ -1,58 +1,28 @@
-//Donut chart example
-nv.addGraph(function() {
-  var chart = nv.models.pieChart()
-      .x(function(d) { return d.label })
-      .y(function(d) { return d.value })
-      .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
-      .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
-      .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
-      .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
-      .showLabels(true)     //Display pie labels
-      ;
 
-    d3.select("#chart2 svg")
-        .datum(exampleData())
-        .transition().duration(350)
-        .call(chart)
-        .style({"width": "100%", "height" : "100%", "font-align" : "text-center" });
-
-  return chart;
+var chart = c3.generate({
+    bindto:"#deaths_by_country_donut",
+    data: {
+        json: donutData.countryDeathsForChart,
+        keys: {
+            value : donutData.countriesForAxisLabels
+        },
+        type : 'donut',
+        onclick: function (d, i) { console.log("onclick", d, i); },
+        onmouseover: function (d, i) { console.log("onmouseover", d, i); },
+        onmouseout: function (d, i) { console.log("onmouseout", d, i); }
+    },
+    donut: {
+        title: "Deaths By Country",
+        label: {
+            format: function (value, ratio, id) {
+                return d3.format('%')(ratio);
+            },
+        },
+    },
+    tooltip : {
+        format: {
+            value: function (value, ratio, id, index) { return d3.format(',')(value) + ' Deaths'; }
+        }
+    }
+    
 });
-
-//Pie chart example data. Note how there is only a single array of key-value pairs.
-function exampleData() {
-  return  [
-      { 
-        "label": "One",
-        "value" : 29.765957771107
-      } , 
-      { 
-        "label": "Two",
-        "value" : 0
-      } , 
-      { 
-        "label": "Three",
-        "value" : 32.807804682612
-      } , 
-      { 
-        "label": "Four",
-        "value" : 196.45946739256
-      } , 
-      { 
-        "label": "Five",
-        "value" : 0.19434030906893
-      } , 
-      { 
-        "label": "Six",
-        "value" : 98.079782601442
-      } , 
-      { 
-        "label": "Seven",
-        "value" : 13.925743130903
-      } , 
-      { 
-        "label": "Eight",
-        "value" : 5.1387322875705
-      }
-    ];
-}

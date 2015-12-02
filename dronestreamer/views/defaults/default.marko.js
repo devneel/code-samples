@@ -15,7 +15,7 @@ function create(__helpers) {
         "content": data.layoutContent
       });
 
-    out.w('<meta charset="UTF-8"><meta http-equiv="content-type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta itemprop="description" name="Description" content="Dronestre.am Data Visualizations"><link href="css/paper.min.css" rel="stylesheet"><link href="css/default.css" rel="stylesheet"><title>');
+    out.w('<meta charset="UTF-8"><meta http-equiv="content-type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta itemprop="description" name="Description" content="Dronestre.am Data Visualizations"><link href="css/default.css" rel="stylesheet"><title>');
     __tag(out,
       ______node_modules_marko_layout_placeholder_tag_js,
       {

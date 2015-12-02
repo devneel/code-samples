@@ -31,7 +31,7 @@ function create(__helpers) {
               "layout": __layoutHelper
             },
             function(out) {
-              out.w('<div class="container"><h1>Dronestreamer</h1><p class="lead">Data visualizations of drone devastation</p><p>Data provided by <a href="http://dronestre.am">dronestre.am</a></p></div>');
+              out.w('<div class="container"><h1>Dronestreamer</h1><p class="lead">Data visualizations of drone devastation</p><ul><li><p class="lead">2 visualizations of <a href="/deaths-by-country">deaths by country</a></p></li><li><p class="lead">See <a href="/table">table of raw data</a></p></li></ul><p>Data provided by <a href="http://dronestre.am">dronestre.am</a> | Full source on <a href="http://github.com/devneel/dronestreamer">github</a></p></div>');
             });
         },
         "*": {

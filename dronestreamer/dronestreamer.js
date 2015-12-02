@@ -6,11 +6,31 @@ views = 	require('co-views'),
 marko = 	require('marko'),
 serve = 	require('koa-static'),
 compress = 	require('koa-compress'),
-rp = 		require('request-promise')
+less = 		require('koa-less'),
+path = 		require('path'),
 
+
+deathsByCountry = require('./controllers/deathsByCountry.js'),
+dataFeed = 	require('./controllers/dataFeed.js')
 
 
 var app = koa(); // initiate koa app
+
+
+// look for less files in /styles, and output the compiled css to /public
+app.use(less(path.join(__dirname, 'styles'), {
+	dest: path.join(__dirname, 'public'),
+	preprocess: {
+		path: function(pathname, req) {
+			return pathname.replace(path.sep + 'css' + path.sep, path.sep);
+		}
+	},
+
+
+}));
+
+
+app.use(serve('./public')); // static files are served from /public directory
 
 var render = views(__dirname + '/views/'); // our views will load from the /views directory
 
@@ -23,46 +43,6 @@ app.use(compress(
 }
 ));
 
-app.use(serve(__dirname + '/public')); // static files are served from /public directory
-
-
-function getDataFeed() {
- 
-	var url = "http://api.dronestre.am/data";
-	var options = {
-		url: url,
-		headers: { 'User-Agent': 'request' },
-	};
-
-	return rp(options).then(function(result) {
-		var info = JSON.parse(result);
-		return info.strike;
-	});
-};
-
-function getCountryIndex(country_deaths, country){
-	for(let j=0; j<country_deaths.length; j++){
-		if( country_deaths[j].country==country) {
-			return j;
-		}
-	}
-	return -1;
-}
-function getDeathsByCountry(allStrikes) {
-	var country_deaths = [];
-	for(let i = 0; i < allStrikes.length; i++) {
-		var strike = allStrikes[i];
-		var deaths = parseInt(strike.deaths_max);
-		deaths = isNaN(deaths) ? 0 : deaths;
-		var index_of_country = getCountryIndex(country_deaths, strike.country);
-		if ( index_of_country != -1) {
-			country_deaths[index_of_country].deaths += deaths;
-		} else {
-			country_deaths.push({"country":strike.country, "deaths":deaths});
-		}
-	}
-}
-
 
 // router method to serve home page
 router.get('/', function *() {
@@ -74,29 +54,26 @@ router.get('/', function *() {
 // router method to serve first page
 router.get('/deaths-by-country', function *() {
 	
-	var deathsByCountry = getDeathsByCountry(yield getDataFeed())
 
-	this.body = marko.load('./views/deaths-by-country.marko').stream();
+	let data = deathsByCountry.getDeathsByCountry(); // has two arrays: deathCountByCountry and countryDeathsBreakdown
+
+	this.body = marko.load('./views/deaths-by-country.marko').stream(data);
 	this.type = "text/html";
 })
-
-
 
 // router method to serve raw data table
 router.get('/table', function *() {
 
 
 	let data = {
-		strikes : getDataFeed()
+		strikes : dataFeed.getDataFeed()
 	};
+
+
 
 	this.body =  marko.load('./views/table.marko').stream(data);
 	this.type = "text/html";
 })
-
-
-
-
 
 
 app
